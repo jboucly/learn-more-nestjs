@@ -1,0 +1,30 @@
+version: '3'
+
+networks:
+    learn_more_nestjs:
+
+services:
+    postgresql:
+        image: postgres:14.3
+        ports:
+            - 5455:5432
+        environment:
+            POSTGRES_DB: ${DATABASE_NAME}
+            POSTGRES_USER: ${DATABASE_USER}
+            POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+        networks:
+            - learn_more_nestjs
+        volumes:
+            - ./volumes:/var/lib/postgresql/data
+
+    pgadmin4:
+        image: dpage/pgadmin4:latest
+        ports:
+            - 3500:80
+        environment:
+            - 'PGADMIN_DEFAULT_EMAIL=root@learn.fr'
+            - 'PGADMIN_DEFAULT_PASSWORD=root'
+        volumes:
+            - ./pgadmin/servers.json:/pgadmin4/servers.json
+        networks:
+            - learn_more_nestjs
