@@ -3,6 +3,7 @@
         "module": "commonjs",
         "declaration": true,
         "removeComments": true,
+        "esModuleInterop": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
@@ -13,7 +14,8 @@
         "incremental": true,
         "paths": {
             "@learn-more-nestjs/configs/*": ["src/configs/*"],
-            "@learn-more-nestjs/database/*": ["src/database/*"]
+            "@learn-more-nestjs/database/*": ["src/database/*"],
+            "@learn-more-nestjs/resources/*": ["src/resources/*"]
         }
     }
 }

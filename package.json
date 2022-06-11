@@ -14,6 +14,9 @@
         "start:debug": "nest start --debug --watch",
         "start:prod": "node dist/main",
         "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+        "migration:run": "mikro-orm migration:up",
+        "migration:revert": "mikro-orm migration:down",
+        "migration:generate": "mikro-orm migration:create",
         "test": "jest",
         "test:watch": "jest --watch",
         "test:cov": "jest --coverage",
@@ -21,7 +24,9 @@
         "test:e2e": "jest --config ./test/jest-e2e.json"
     },
     "dependencies": {
+        "@mikro-orm/cli": "^5.2.0",
         "@mikro-orm/core": "^5.2.0",
+        "@mikro-orm/migrations": "^5.2.0",
         "@mikro-orm/nestjs": "^5.0.2",
         "@mikro-orm/postgresql": "^5.2.0",
         "@nestjs/common": "^7.5.1",
@@ -31,7 +36,8 @@
         "@nestjs/platform-express": "^7.5.1",
         "reflect-metadata": "^0.1.13",
         "rimraf": "^3.0.2",
-        "rxjs": "^6.6.3"
+        "rxjs": "^6.6.3",
+        "uuid": "^8.3.2"
     },
     "devDependencies": {
         "@nestjs/cli": "^7.5.1",
@@ -41,6 +47,7 @@
         "@types/jest": "^26.0.15",
         "@types/node": "^14.14.6",
         "@types/supertest": "^2.0.10",
+        "@types/uuid": "^8.3.4",
         "@typescript-eslint/eslint-plugin": "^4.6.1",
         "@typescript-eslint/parser": "^4.6.1",
         "eslint": "^7.12.1",
@@ -71,5 +78,18 @@
         ],
         "coverageDirectory": "../coverage",
         "testEnvironment": "node"
+    },
+    "mikro-orm": {
+        "useTsNode": true,
+        "configPaths": [
+            "./src/database/configs/mikro-orm.config.ts",
+            "./dist/database/configs/mikro-orm.config.js"
+        ],
+        "entitiesTs": [
+            "./src/**/*.entity.ts"
+        ],
+        "entities": [
+            "./dist/src/**/*.entity.js"
+        ]
     }
 }
