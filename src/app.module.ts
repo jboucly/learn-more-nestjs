@@ -1,8 +1,16 @@
+import { configurations } from '@learn-more-nestjs/configs/index';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
-import { ProductsModule } from './products/products.module';
 
 @Module({
-    imports: [DatabaseModule, ProductsModule],
+    imports: [
+        DatabaseModule,
+
+        ConfigModule.forRoot({
+            isGlobal: true,
+            load: configurations,
+        }),
+    ],
 })
 export class AppModule {}

@@ -1,13 +1,20 @@
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
     imports: [
-        MikroOrmModule.forRoot({
-            type: 'postgresql',
-            entities: ['./dist/src/**/*.entity.js'],
-            entitiesTs: ['./src/**/*.entity.ts'],
-            dbName: 'learn-more-nestjs',
+        MikroOrmModule.forRootAsync({
+            inject: [ConfigService],
+            useFactory: (configService: ConfigService) => ({
+                type: 'postgresql',
+                entitiesTs: ['./src/**/*.entity.ts'],
+                entities: ['./dist/src/**/*.entity.js'],
+                user: configService.getOrThrow('database.user'),
+                host: configService.getOrThrow('database.host'),
+                dbName: configService.getOrThrow('database.name'),
+                password: configService.getOrThrow('database.password'),
+            }),
         }),
     ],
 })

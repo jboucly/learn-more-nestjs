@@ -1,0 +1,13 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "learn-more-nestjs",
+            "Group": "Servers",
+            "Port": 5432,
+            "Username": "root",
+            "Host": "postgresql",
+            "SSLMode": "prefer",
+            "MaintenanceDB": "postgres"
+        }
+    }
+}

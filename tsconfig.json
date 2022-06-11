@@ -10,6 +10,10 @@
         "sourceMap": true,
         "outDir": "./dist",
         "baseUrl": "./",
-        "incremental": true
+        "incremental": true,
+        "paths": {
+            "@learn-more-nestjs/configs/*": ["src/configs/*"],
+            "@learn-more-nestjs/database/*": ["src/database/*"]
+        }
     }
 }
