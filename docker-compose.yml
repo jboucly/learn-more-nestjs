@@ -5,9 +5,11 @@ networks:
 
 services:
     postgresql:
-        image: postgres:14.3
+        image: postgres:14.2
         ports:
             - 5455:5432
+        env_file:
+            - .env
         environment:
             POSTGRES_DB: ${DATABASE_NAME}
             POSTGRES_USER: ${DATABASE_USER}
@@ -15,9 +17,8 @@ services:
         networks:
             - learn_more_nestjs
         volumes:
-            - ./volumes:/var/lib/postgresql/data
-
-    pgadmin4:
+            - ./volumes/postgresql:/var/lib/postgresql/data
+    pgadmin:
         image: dpage/pgadmin4:latest
         ports:
             - 3500:80
